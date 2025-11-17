@@ -40,7 +40,7 @@ export const registerUser = expressAsyncHandler( async (req, res) => {
         });
 
         //Email verification link
-        const verifyURL = `http://localhost:5173/verify-email/${verificationToken}`;
+        const verifyURL = `${process.env.FRONTEND_URL}/verify-email/${verificationToken}`;
         const message = `
         <h2>Welcome ${name}!</h2>
         <p>Click below to verify your email:</p>
@@ -133,7 +133,7 @@ export const forgotPassword = expressAsyncHandler( async (req, res) => {
     await user.save();
     
     //Create password reset URL 
-    const resetURL = `http://localhost:5173/reset-password/${resetToken}`;
+    const resetURL = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
 
     //message
     const message = `

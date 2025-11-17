@@ -4,6 +4,7 @@ import { CheckCircle, XCircle  } from "lucide-react";
 import { toast } from "react-toastify";
 
 import axios from "axios";
+import { verifyEmail } from "../api/api";
 
 const VerifyEmail = () => {
   const { token } = useParams();
@@ -15,10 +16,7 @@ const VerifyEmail = () => {
   useEffect(() => {
     const verify = async () => {
       try {
-        const data = await axios.get(
-          `http://localhost:8080/api/user/verify-email/${token}`
-        );
-
+        const data = await verifyEmail(token);
         setMessage(data.message);
         setSuccess(true);
         toast.success("Email verified successfully!");

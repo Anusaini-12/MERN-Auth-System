@@ -21,3 +21,8 @@ export const resetPassword = async(token, password) => {
     const res = await axios.put(`${API_URL}/reset-password/${token}`,{ password });
     return res.data;
 };
+
+export const verifyEmail = async(token) => {
+    const res = await axios.get(`${API_URL}/verify-email/${token}`);
+    return res.data;
+}
