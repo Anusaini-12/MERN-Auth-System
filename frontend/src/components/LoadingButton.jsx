@@ -4,7 +4,7 @@ const LoadingButton = ({ loading, children }) => {
       type="submit"
       disabled={loading}
       className={`w-full flex items-center justify-center gap-2 
-      text-white p-2 rounded-md bg-gradient-to-r from-green-500 to-blue-500
+      text-white p-2 mt-4  rounded-md bg-gradient-to-r from-green-500 to-blue-500
       transition disabled:opacity-50 disabled:cursor-not-allowed`}
     >
       {loading && (
