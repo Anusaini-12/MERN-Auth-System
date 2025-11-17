@@ -2,8 +2,6 @@ import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom";
 import { CheckCircle, XCircle  } from "lucide-react"; 
 import { toast } from "react-toastify";
-
-import axios from "axios";
 import { verifyEmail } from "../api/api";
 
 const VerifyEmail = () => {
@@ -31,7 +29,6 @@ const VerifyEmail = () => {
     verify();
   }, 
   [token]);
-
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-green-500 to-blue-900">

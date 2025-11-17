@@ -18,7 +18,6 @@ connectDB();
 
 app.use("/api/user", authRoute);
 
-
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 3000;
