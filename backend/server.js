@@ -8,7 +8,7 @@ import errorHandler from './middleware/error.js';
 dotenv.config();
 const app = express();
 app.use(cors({
-  origin: "https://mern-auth-system-dzly.onrender.com",
+  origin: process.env.FRONTEND_URL,
   credentials: true,
 }));
 app.use(express.json());
