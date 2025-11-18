@@ -20,7 +20,7 @@ const VerifyEmail = () => {
         toast.success("Email verified successfully!");
 
       } catch (err){
-        setMessage(err.response?.data?.message);
+        setMessage("Your verification link is invalid or expired.");
         setSuccess(false);
         toast.error("Your verification link is invalid or expired.");
       }
