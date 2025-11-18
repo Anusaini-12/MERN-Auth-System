@@ -15,7 +15,7 @@ const App = () => {
       <BrowserRouter>
          <ToastContainer position="top-right" autoClose={2000} />
        <Routes>
-          <Route path="/" element={ <Home />} />
+          <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/verify-email/:token" element={<VerifyEmail/>} />

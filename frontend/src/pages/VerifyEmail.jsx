@@ -17,12 +17,12 @@ const VerifyEmail = () => {
         const data = await verifyEmail(token);
         setMessage(data.message);
         setSuccess(true);
-        toast.success("Email verified successfully!");
+        toast.success("Email verified successfully!", { toastId: "verify-success" });
 
       } catch (err){
         setMessage(err.response?.data?.message);
         setSuccess(false);
-        toast.error("Invalid or expired token.");
+        toast.error("Invalid or expired token.", { toastId: "verify-error"});
       }
     };
 

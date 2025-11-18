@@ -22,22 +22,24 @@ const Register = () => {
 
   const handleOnSubmit = async (e) => {
       e.preventDefault();
+
+      if(loading) return;
       setLoading(true);
 
       if (!formData.name.trim()) {
-        toast.error("Please enter your name.");
+        toast.error("Please enter your name.", { toastId: "name-error" });
         setLoading(false);
         return;
       }
 
       if (!formData.email.trim()) {
-        toast.error("Please enter your email.");
+        toast.error("Please enter your email.", { toastId: "email-error" });
         setLoading(false);
         return;
       }
 
       if (!formData.password.trim()) {
-        toast.error("Password is required!");
+        toast.error("Password is required!", { toastId: "pass-error" });
         setLoading(false);
       return;
       }
@@ -45,7 +47,7 @@ const Register = () => {
       const passCheck = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[_]).{8,}$/;
           if (!passCheck.test(formData.password)) {
             toast.error(
-            "Password must contain a-z, A-Z, 0-9, '_' and be 8+ characters long."
+            "Password must contain a-z, A-Z, 0-9, '_' and be 8+ characters long.", { toastId: "pass-format-error" }
           );
           setLoading(false);
           return;
@@ -53,14 +55,14 @@ const Register = () => {
 
       try{
         const data = await registerUser(formData);
-        toast.success(data.message || "Registration successful!");
+        toast.success(data.message || "Registration successful!", { toastId: "register-success" });
         setFormData({
          name: "",
          email: "",
          password: "",
         });
       } catch (err) {
-        toast.error(err.response?.data?.message || "Something went wrong.");
+        toast.error(err.response?.data?.message || "Something went wrong.", { toastId: "register-fail" });
       } finally {
         setLoading(false);
       }
@@ -115,6 +117,7 @@ const Register = () => {
             onClick={() => setShowPassword(!showPassword)}
           ></i>
           </div>
+          
           {formData.password && !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[_]).{8,}$/.test(formData.password) && (
            <p className="text-red-500 text-xs md:text-sm">
            Password must contain a-z, A-Z, 0-9, "_", and be 8+ characters.

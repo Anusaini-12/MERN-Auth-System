@@ -11,11 +11,13 @@ const ForgotPassword = () => {
   
   const handleSubmit = async (e) => {
     e.preventDefault();
-     setLoading(true);
+
+    if (loading) return;
+    setLoading(true);
 
     if (!email) {
       setLoading(false);
-      toast.error("Email is required!");
+      toast.error("Email is required!", { toastId: "forgot-email" });
       return;
     }
 
@@ -23,12 +25,12 @@ const ForgotPassword = () => {
       const data = await forgotPassword(email);
       setMessage(data.message);
       setError(false);
-      toast.success(data.message);
+      toast.success(data.message, { toastId: "forgot-success" });
       
     } catch (err) {
       setMessage(err.response?.data?.message);
       setError(true);
-      toast.error(err.response?.data?.message || "Something went wrong.");
+      toast.error(err.response?.data?.message || "Something went wrong.", { toastId: "forgot-error" });
 
     } finally {
        setLoading(false);

@@ -23,16 +23,18 @@ const Login = () => {
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
+
+    if (loading) return;
     setLoading(true);
 
     if (!formData.email.trim()) {
-      toast.error("Please enter your email.");
+      toast.error("Please enter your email.", { toastId: "login-email" });
       setLoading(false);
       return;
     }
     
     if (!formData.password.trim()) {
-        toast.error("Password is required!");
+        toast.error("Password is required!", { toastId: "login-password" });
         setLoading(false);
       return;
     }
@@ -40,7 +42,8 @@ const Login = () => {
     const passCheck = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[_]).{8,}$/;
     if (!passCheck.test(formData.password)) {
       toast.error(
-        "Password must contain a-z, A-Z, 0-9, '_' and be 8+ characters long."
+        "Password must contain a-z, A-Z, 0-9, '_' and be 8+ characters long.",
+        { toastId: "login-pass-format" }
       );
       setLoading(false);
       return;
@@ -48,7 +51,7 @@ const Login = () => {
       
       try{
         const data = await loginUser(formData);
-        toast.success(data.message || "Login successful!");
+        toast.success(data.message || "Login successful!", {toastId: "login-success"});
 
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data));
@@ -56,7 +59,8 @@ const Login = () => {
 
       } catch (err) {
         console.log(err);
-        toast.error(err.response?.data?.message || "Something went wrong!");
+        toast.error(err.response?.data?.message || "Something went wrong!", {toastId: "login-fail"});
+
       } finally {
         setLoading(false);
       }

@@ -18,10 +18,12 @@ const ResetPassword = () => {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
+
+    if(loading) return;
     setLoading(true);
 
     if (!password.trim()) {
-      toast.error("Password is required!");
+      toast.error("Password is required!", { toastId: "reset-pass-empty" });
       setLoading(false);
       return;
     }
@@ -29,27 +31,28 @@ const ResetPassword = () => {
     const passCheck = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[_]).{8,}$/;
     if (!passCheck.test(password)) {
       toast.error(
-        "Password must contain: a-z, A-Z, 0-9, underscore (_), and be 8+ characters."
+        "Password must contain: a-z, A-Z, 0-9, underscore (_), and be 8+ characters.",
+         { toastId: "reset-pass-invalid" }
       );
       setLoading(false);
       return;
     }
 
       if (password !== confirmPassword) {
-       toast.error("Passwords do not match!");
+       toast.error("Passwords do not match!", { toastId: "reset-pass-mismatch" });
        setLoading(false);
       return;
     }
 
     try {
       const data = await resetPassword(token, password);
-      toast.success("Password reset successfully!");
+      toast.success("Password reset successfully!", {toastId: "reset-pass-success"});
       setPassword("");
       setConfirmPassword("");
 
       setTimeout(() => navigate("/login"), 2000);
     } catch (err) {
-      toast.error(err.response?.data?.message || "Invalid or expired link.");
+      toast.error(err.response?.data?.message || "Invalid or expired link.", {toastId: "reset-pass-error"});
     } finally {
       setLoading(false);
     }
