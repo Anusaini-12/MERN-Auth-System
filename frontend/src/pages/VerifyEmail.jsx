@@ -22,7 +22,7 @@ const VerifyEmail = () => {
       } catch (err){
         setMessage(err.response?.data?.message);
         setSuccess(false);
-        toast.error("Invalid or expired token.");
+        toast.error("Your verification link is invalid or expired.");
       }
     };
 
