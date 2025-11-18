@@ -12,7 +12,7 @@ export const sendEmail = async (to, subject, html) => {
       },
       {
         headers: {
-          "api-key": process.env.SMTP_PASS, // Brevo API key
+          "api-key": process.env.BREVO_API_KEY, // Brevo API key
           "Content-Type": "application/json",
         },
       }
