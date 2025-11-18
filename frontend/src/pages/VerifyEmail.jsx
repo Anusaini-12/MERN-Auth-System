@@ -32,7 +32,7 @@ const VerifyEmail = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-green-500 to-blue-900">
-        <div className="flex flex-col justify-center items-center bg-white py-10 px-8 md:px-10 rounded-md shadow-lg max-w-lg text-center">
+        <div className="flex flex-col justify-center items-center bg-white py-10 px-4 md:px-10 rounded-md shadow-lg max-w-lg text-center">
           
           {success === null && (
           <>
